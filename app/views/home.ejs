@@ -6,41 +6,41 @@
     <title>Home </title>
 
     <script>
-        var leitorDeCSV = new FileReader();
+        var leitor = new FileReader();
         window.onload = function init() {
-            leitorDeCSV.onload = leCSV;
+            leitor.onload = lerArquivo;
         };
 
-        function pegaCSV(inputFile) {
+        function pegarArquivo(inputFile) {
             var file = inputFile.files[0];
-            leitorDeCSV.readAsText(file);
-        }
+            leitor.readAsText(file);
+        };
 
-        function leCSV(evt) {
+        function lerArquivo(evt) {
 
             var fileArr = evt.target.result.split('\n');
-            var strDiv = '<table>';
+            var tabela = '<table>';
 
             for (var i=0; i<fileArr.length; i++) {
-                strDiv += '<tr>';
+                tabela += '<tr>';
                 var fileLine = fileArr[i].split(',');
                     for (var j=0; j<fileLine.length; j++) {
-                        strDiv += '<td>'+fileLine[j].trim()+'</td>';
-                }
-                strDiv += '</tr>';
-            }
+                        tabela += '<td>'+fileLine[j].trim()+'</td>';
+                };
+                tabela += '</tr>';
+            };
 
-                strDiv += '</table>';
-                var CSVsaida = document.getElementById('CSVsaida');
-                CSVsaida.innerHTML = strDiv;
-        }
+                tabela += '</table>';
+                var saida = document.getElementById('saida');
+                saida.innerHTML = tabela;
+        };
 
     </script>
 </head>
 <body>
 
-    <input type="file" id="inputCSV" onchange="pegaCSV(this)">
-    <div id="CSVsaida"></div>
+    <input type="file" id="inputCSV" onchange="pegarArquivo(this)">
+    <div id="saida"></div>
 
     
 </body>
